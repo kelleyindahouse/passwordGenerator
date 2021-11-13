@@ -1,11 +1,3 @@
-// Object to contain declared functions
-const randomFunctions = {
-  lower: randomLower,
-  upper: randomUpper,
-  number: randomNumber,
-  symbol: randomSymbol
-}
-
 // function to generate random lowercase letter
 function randomLower() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
@@ -26,22 +18,35 @@ function randomSymbol() {
 
 // When generate button is clicked
 document.getElementById('generate').addEventListener('click', () => {
+  // Container for generated password
+  let userPassword = "";
   // Prompts user for desired password length
-  let passwordLength = prompt("Please enter a number for how long you'd like your password to be. (Min: 8, Max: 128)")
-  passwordLength = parseInt(passwordLength)
+  let passwordLength = prompt("Please enter a number for how long you'd like your password to be. (Min: 8, Max: 128)");
+  passwordLength = parseInt(passwordLength);
   // Prompts user to include uppercase letters or not
-  let uppercase = prompt("Would you like uppercase letters in your password? (y or n)")
+  let uppercase = prompt("Would you like uppercase letters in your password? (y or n)");
   // Prompts user to include lowercase letters or not
-  let lowercase = prompt("Would you like lowercase letters in your password? (y or n)")
+  let lowercase = prompt("Would you like lowercase letters in your password? (y or n)");
   // Prompts user to include numbers or not
-  let numbers = prompt("Would you like numbers in your password? (y or n)")
+  let numbers = prompt("Would you like numbers in your password? (y or n)");
   // Prompts user to include symbols or not
-  let symbols = prompt("Would you like symbols in your password? (y or n)")
+  let symbols = prompt("Would you like symbols in your password? (y or n)");
 
-  for (let i = 8; i <= passwordLength; i++) {
-    
+  for (let i = 0; i <= passwordLength; i++) {
+    if (uppercase === 'y') {
+      userPassword += randomUpper()
+    }
+    if (lowercase === 'y') {
+      userPassword += randomLower()
+    }
+    if (numbers === 'y') {
+      userPassword += randomNumber()
+    }
+    if (symbols === 'y') {
+      userPassword += randomSymbol()
+    }
   }
 
-
+  document.getElementById('password').innerHTML = userPassword;
 
 })
