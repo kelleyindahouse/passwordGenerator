@@ -19,10 +19,18 @@ function randomSymbol() {
 // When generate button is clicked
 document.getElementById('generate').addEventListener('click', () => {
   // Container for generated password
-  let userPassword = "";
+  let userPassword = ""
+
   // Prompts user for desired password length
-  let passwordLength = prompt("Please enter a number for how long you'd like your password to be. (Min: 8, Max: 128)");
-  passwordLength = parseInt(passwordLength);
+  let userLength = prompt("Please enter a number for how long you'd like your password to be. (Min: 8, Max: 128)");
+
+  if (userLength < 8 || userLength > 128 || userLength === NaN) {
+    alert("Please enter a number that is greater than 7 and less than 129.")
+  }
+
+  passLength = parseInt(userLength);
+  
+
   // Prompts user to include uppercase letters or not
   let uppercase = prompt("Would you like uppercase letters in your password? (y or n)");
   // Prompts user to include lowercase letters or not
@@ -32,7 +40,7 @@ document.getElementById('generate').addEventListener('click', () => {
   // Prompts user to include symbols or not
   let symbols = prompt("Would you like symbols in your password? (y or n)");
 
-  for (let i = 0; i <= passwordLength; i++) {
+  for (let i = 0; i <= passLength; i++) {
     if (uppercase === 'y') {
       userPassword += randomUpper()
     }
@@ -46,7 +54,7 @@ document.getElementById('generate').addEventListener('click', () => {
       userPassword += randomSymbol()
     }
   }
-
-  document.getElementById('password').innerHTML = userPassword;
+  // Return generated password set to user submitted password length
+  document.getElementById('password').innerHTML = userPassword.substr(0, passLength);
 
 })
